@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
+/* Paleta oficial Gráfica LT: Amarillo, Magenta, Cyan + Tinta/Blanco */
+@theme inline {
+  --color-cyan: #1CA7E5;
+  --color-magenta: #FB1988;
+  --color-yellow: #EBE46E;
+  --color-brand-blue: #1CA7E5; /* Alias a cyan corporativo */
+  --color-ink: #0a0a0f;
+  --color-paper: #ffffff;
+  --color-mist: #f6f8fb;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0f;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Compensa el header fijo al saltar a una sección */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Utilidad: degradado de marca CMY */
+.bg-brand-gradient {
+  background-image: linear-gradient(
+    120deg,
+    var(--color-cyan),
+    var(--color-magenta) 50%,
+    var(--color-yellow)
+  );
+}
+
+.text-brand-gradient {
+  background-image: linear-gradient(
+    120deg,
+    var(--color-cyan),
+    var(--color-magenta) 50%,
+    var(--color-yellow)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
