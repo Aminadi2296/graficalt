@@ -30,6 +30,7 @@ export const services: Service[] = [
       "Señalización corporativa, direccional y normativa para oficinas, edificios y espacios comerciales.",
     icon: Signpost,
     accent: "cyan",
+    href: "/senaleticas",
   },
   {
     slug: "letras-volumetricas",

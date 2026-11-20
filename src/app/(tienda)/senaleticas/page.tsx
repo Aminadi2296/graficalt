@@ -1,0 +1,130 @@
+import Link from 'next/link'
+import Image from 'next/image'
+import { ProductGrid } from '@/components/ProductCard'
+import { SHIPPING, SITE } from '@/lib/config'
+import { getCategoryTree, listProducts } from '@/lib/data'
+import { clp } from '@/lib/format'
+
+export const revalidate = 60
+
+export default async function Home() {
+  const { tree } = await getCategoryTree()
+  const latest = await listProducts({ limit: 8 }).catch(() => null)
+
+  return (
+    <>
+      <section className="hero">
+        <video
+          className="hero-video"
+          src="/hero.webm"
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+        />
+        <div className="hero-inner">
+          <div className="hero-copy">
+            <h1>Protege tu espacio con señalética normada.</h1>
+            <p>
+              Advertencia, prohibición, evacuación, EPP y obras. Cumple DS 594, NCh 1410 y NCh 1411.
+              Compras sin crear cuenta y envío a todo Chile gratis sobre {clp(SHIPPING.freeFrom)}.
+            </p>
+            <div className="hero-actions">
+              <Link href="/catalogo" className="btn btn-yellow">
+                Ver catálogo
+              </Link>
+              <a
+                href={`https://wa.me/${SITE.whatsapp}`}
+                className="btn btn-ghost"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Pedir cotización
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section featured-categories" aria-label="Categorías destacadas">
+        <h2>Encuentra la señal que necesitas</h2>
+        <div className="featured-category-grid">
+          <Link className="featured-category-card" href="/categoria/fotoluminiscentes">
+            <span className="featured-category-image">
+              <Image
+                src="/Untitled%20design%20(2).svg"
+                alt=""
+                fill
+                sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
+              />
+            </span>
+            <span className="featured-category-content">
+              <span className="featured-category-title">Fotoluminiscentes</span>
+              <span className="featured-category-cta">
+                Explorar <span aria-hidden="true">↗</span>
+              </span>
+            </span>
+          </Link>
+          <Link className="featured-category-card" href="/categoria/sustancias-peligrosas">
+            <span className="featured-category-image">
+              <Image
+                src="/Untitled%20design%20(3).svg"
+                alt=""
+                fill
+                sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
+              />
+            </span>
+            <span className="featured-category-content">
+              <span className="featured-category-title">Sustancias peligrosas</span>
+              <span className="featured-category-cta">
+                Explorar <span aria-hidden="true">↗</span>
+              </span>
+            </span>
+          </Link>
+          <Link className="featured-category-card" href="/categoria/personalizables">
+            <span className="featured-category-image">
+              <Image
+                src="/Untitled%20design%20(4).svg"
+                alt=""
+                fill
+                sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw"
+              />
+            </span>
+            <span className="featured-category-content">
+              <span className="featured-category-title">Personalizadas</span>
+              <span className="featured-category-cta">
+                Explorar <span aria-hidden="true">↗</span>
+              </span>
+            </span>
+          </Link>
+        </div>
+      </section>
+
+      {latest && latest.docs.length > 0 && (
+        <section className="section">
+          <div className="section-head">
+            <h2>Novedades</h2>
+            <Link href="/catalogo">Ver todo</Link>
+          </div>
+          <ProductGrid products={latest.docs} />
+        </section>
+      )}
+
+      <section className="section values">
+        <div>
+          <h3>Fabricación propia</h3>
+          <p>Sin intermediarios: precio de fabricante y control de calidad en cada señal.</p>
+        </div>
+        <div>
+          <h3>Normas chilenas</h3>
+          <p>Colores, formas y pictogramas según DS 594, NCh 1410 y NCh 1411.</p>
+        </div>
+        <div>
+          <h3>A tu medida</h3>
+          <p>Tamaños, materiales y textos personalizados. Escríbenos y cotizamos por WhatsApp.</p>
+        </div>
+      </section>
+    </>
+  )
+}

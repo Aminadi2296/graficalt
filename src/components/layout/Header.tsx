@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { site } from "@/data/site";
+import { SiteCartBadge } from "@/components/layout/SiteCartBadge";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -33,6 +34,7 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <SiteCartBadge />
           <Link
             href="/#contacto"
             className="rounded-full bg-magenta px-5 py-2 text-sm font-semibold text-white transition-transform hover:scale-105"
