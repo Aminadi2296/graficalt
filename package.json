@@ -10,6 +10,7 @@
     "lint": "eslint",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "migrate:images": "cross-env NODE_OPTIONS=--no-deprecation tsx src/migrate-images-to-r2.ts",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload"
   },
   "dependencies": {

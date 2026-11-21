@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
         search: "",
       },
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.r2.dev",
+      },
+    ],
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
