@@ -8,6 +8,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { QuoteForm } from "@/components/frameless/QuoteForm";
+import { HeroShowcase } from "@/components/frameless/HeroShowcase";
 import {
   framelessApplications,
   framelessBenefits,
@@ -39,47 +40,34 @@ export default function FramelessPage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-ink pt-16 text-white">
-        <div className="absolute -right-32 top-0 size-[32rem] rounded-full bg-cyan/30 blur-3xl" />
-        <div className="absolute -left-20 bottom-0 size-80 rounded-full bg-magenta/25 blur-3xl" />
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-72 rounded-full bg-yellow/15 blur-3xl" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2">
-          <div>
+      <section className="relative flex h-screen items-center overflow-hidden bg-ink pt-16 text-white">
+        <HeroShowcase />
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-8">
+          <div className="max-w-lg">
             <Eyebrow>Imagen que impulsa tu negocio</Eyebrow>
-            <h1 className="mt-4 font-display text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+            <h1 className="mt-3 font-display text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
               Cajas de Luz <span className="text-brand-gradient">Frameless</span> para Empresas
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-white/75">
+            <p className="mt-4 max-w-md text-base leading-relaxed text-white/80 lg:text-lg">
               Diseño, fabricación e instalación de cajas de luz a medida para locales comerciales,
               oficinas, tiendas y proyectos corporativos.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3">
               <a href={wa} target="_blank" rel="noopener noreferrer" className={btnPrimary}>
                 <MessageCircle className="size-5" /> Cotizar por WhatsApp
               </a>
-              <a href="#cotiza" className={`${btnOutline} border-cyan text-cyan hover:bg-cyan hover:text-ink`}>
+              <a
+                href="#cotiza"
+                className={`${btnOutline} border-cyan bg-ink/40 text-cyan backdrop-blur-sm hover:bg-cyan hover:text-ink`}
+              >
                 Solicitar cotización
               </a>
             </div>
-            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/70">
+            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/75">
               <li>Fabricación a medida</li>
               <li>Iluminación LED</li>
               <li>Diseño, impresión e instalación</li>
             </ul>
-          </div>
-
-          {/* Mockup de caja de luz (reemplazable por foto real) */}
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="aspect-[3/4] rounded-xl border border-white/10 bg-gradient-to-br from-cyan via-magenta to-yellow p-[3px] shadow-[0_0_80px_-10px] shadow-cyan/40">
-              <div className="flex h-full flex-col items-center justify-center rounded-[10px] bg-white/10 p-8 text-center backdrop-blur-sm">
-                <p className="font-display text-4xl font-bold uppercase leading-tight">
-                  Tu marca
-                  <br />
-                  aquí
-                </p>
-                <p className="mt-3 text-sm text-white/80">Tu marca siempre visible</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
