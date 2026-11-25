@@ -62,7 +62,22 @@ section[id] {
   color: transparent;
 }
 
-/* Fundido alfa real sin costuras para el Hero en escritorio */
+/* Fundido alfa real sin costuras para el Hero (móvil: tope superior; escritorio: izquierdo + superior) */
+.hero-seamless-mask {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 10%,
+    black 22%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 10%,
+    black 22%
+  );
+}
+
 @media (min-width: 1024px) {
   .hero-seamless-mask {
     -webkit-mask-image:

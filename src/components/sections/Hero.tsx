@@ -73,21 +73,21 @@ export function Hero() {
     <section
       id="inicio"
       ref={sectionRef}
-      className="relative flex min-h-screen w-full flex-col justify-between overflow-hidden pt-16 lg:h-screen lg:flex-row lg:items-center"
+      className="relative flex w-full flex-col overflow-hidden pt-16 lg:h-screen lg:flex-row lg:items-center"
       style={{
         background: "linear-gradient(180deg, #f4f6f8 0%, #e7e9ed 56%, #d3d4d7 100%)",
       }}
     >
-      {/* Escena Antes / Después desplazada hacia abajo y a la derecha con máscara alfa sin costuras */}
-      <div className="hero-seamless-mask pointer-events-none relative order-2 h-[48vh] w-full overflow-hidden lg:absolute lg:bottom-0 lg:left-[24%] lg:right-0 lg:top-[72px] lg:h-auto lg:w-auto">
+      {/* Escena Antes / Después: proporción 16:10 sin recortar el logo en móvil; abajo-derecha en escritorio */}
+      <div className="hero-seamless-mask pointer-events-none relative order-2 -mt-2 aspect-[16/10] w-full overflow-hidden sm:aspect-[16/9] lg:absolute lg:bottom-0 lg:left-[24%] lg:right-0 lg:top-[72px] lg:mt-0 lg:aspect-auto lg:h-auto lg:w-auto">
         {/* Imagen base: local blanco minimalista sin gráfica */}
         <Image
           src="/hero/before.jpg"
           alt="Fachada de local comercial antes de instalar gráfica"
           fill
           priority
-          sizes="(max-width: 1024px) 100vw, 74vw"
-          className="object-cover object-center lg:object-[center_42%]"
+          sizes="(max-width: 1024px) 100vw, 76vw"
+          className="object-cover object-[42%_center] lg:object-[center_42%]"
         />
 
         {/* Imagen revelada de izquierda a derecha: letras 3D, caja frameless y vinilos CMYK */}
@@ -101,8 +101,8 @@ export function Hero() {
             alt="Fachada comercial transformada por Gráfica LT con letras volumétricas 3D, caja de luz frameless y vinilos CMYK"
             fill
             priority
-            sizes="(max-width: 1024px) 100vw, 74vw"
-            className="object-cover object-center lg:object-[center_42%]"
+            sizes="(max-width: 1024px) 100vw, 76vw"
+            className="object-cover object-[42%_center] lg:object-[center_42%]"
           />
         </div>
 
@@ -120,20 +120,20 @@ export function Hero() {
         />
       </div>
 
-      {/* Contenido limpio del Hero a la izquierda, directo sobre el fondo claro sin ninguna caja */}
-      <div className="relative z-20 order-1 mx-auto w-full max-w-7xl px-6 pb-4 pt-8 lg:flex lg:h-full lg:items-start lg:py-0 lg:pt-14">
-        <div className="max-w-md lg:max-w-[430px]">
-          <h1 className="font-display text-3xl font-bold leading-[1.08] tracking-tight text-ink sm:text-4xl lg:text-5xl">
+      {/* Contenido limpio del Hero: centrado y compacto en móvil; izquierda arriba en escritorio */}
+      <div className="relative z-20 order-1 mx-auto w-full max-w-7xl px-5 pb-4 pt-9 lg:flex lg:h-full lg:items-start lg:px-6 lg:py-0 lg:pt-14">
+        <div className="mx-auto max-w-sm text-center sm:max-w-md lg:mx-0 lg:max-w-[430px] lg:text-left">
+          <h1 className="font-display text-[32px] font-bold leading-[1.08] tracking-tight text-ink sm:text-4xl lg:text-5xl">
             Transformamos espacios en{" "}
             <span className="bg-gradient-to-r from-[#1CA7E5] via-[#FB1988] to-[#b90b61] bg-clip-text text-transparent">
               marcas memorables
             </span>
           </h1>
-          <p className="mt-4 text-sm font-medium leading-relaxed text-ink/75 sm:text-base">
+          <p className="mt-3.5 text-sm font-medium leading-relaxed text-ink/75 sm:text-base">
             Diseño, producción e instalación de letras volumétricas 3D, cajas de luz frameless,
             vinilos y señalética en todo Chile.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-wrap justify-center gap-3 lg:mt-6 lg:justify-start">
             <a
               href="#contacto"
               className="inline-flex items-center gap-2 rounded-full bg-magenta px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-magenta/25 transition hover:brightness-110"
@@ -143,7 +143,7 @@ export function Hero() {
             </a>
             <a
               href="#servicios"
-              className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-white/80 px-6 py-2.5 text-sm font-semibold text-ink shadow-sm backdrop-blur-sm transition hover:border-cyan hover:bg-cyan hover:text-white"
+              className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-white/85 px-6 py-2.5 text-sm font-semibold text-ink shadow-sm backdrop-blur-sm transition hover:border-cyan hover:bg-cyan hover:text-white"
             >
               Ver servicios
             </a>
