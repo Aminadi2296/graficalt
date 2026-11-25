@@ -61,3 +61,17 @@ section[id] {
   background-clip: text;
   color: transparent;
 }
+
+/* Fundido alfa real sin costuras para el Hero en escritorio */
+@media (min-width: 1024px) {
+  .hero-seamless-mask {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 10%, black 28%),
+      linear-gradient(to bottom, transparent 0%, black 10%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.35) 10%, black 28%),
+      linear-gradient(to bottom, transparent 0%, black 10%);
+    mask-composite: intersect;
+  }
+}

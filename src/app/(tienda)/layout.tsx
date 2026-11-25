@@ -28,6 +28,10 @@ export const metadata: Metadata = {
     template: '%s | Gráfica LT',
   },
   description: SITE.description,
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: '/favicon.svg',
+  },
   openGraph: { siteName: 'Gráfica LT', locale: 'es_CL', type: 'website' },
 }
 
