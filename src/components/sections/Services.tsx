@@ -95,14 +95,14 @@ export function Services() {
                       className="object-cover object-center transition-all duration-700 ease-out group-hover:scale-105 group-hover:brightness-105"
                     />
                     <div
-                      className={`absolute inset-0 transition-opacity duration-500 ease-out ${theme.tint} mix-blend-multiply opacity-80 group-hover:opacity-0`}
+                      className={`absolute inset-0 transition-opacity duration-500 ease-out ${theme.tint} mix-blend-multiply opacity-20 lg:opacity-80 lg:group-hover:opacity-0`}
                     />
-                    <div className="absolute inset-0 bg-ink/20 transition-opacity duration-500 ease-out group-hover:opacity-0" />
+                    <div className="absolute inset-0 bg-ink/10 transition-opacity duration-500 ease-out lg:bg-ink/20 lg:group-hover:opacity-0" />
                   </div>
 
-                  {/* Panel inferior wavy más compacto en hover para lucir mejor la foto */}
+                  {/* Panel inferior wavy: abierto por defecto en móvil/tablet; se abre con hover en escritorio */}
                   <div
-                    className={`absolute inset-x-0 bottom-0 z-10 h-[148px] translate-y-[86px] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0 ${theme.panel} ${theme.text}`}
+                    className={`absolute inset-x-0 bottom-0 z-10 h-[148px] translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] lg:translate-y-[86px] lg:group-hover:translate-y-0 ${theme.panel} ${theme.text}`}
                   >
                     {/* Doble ola SVG fluida */}
                     <div
@@ -112,7 +112,7 @@ export function Services() {
                       <svg
                         viewBox="0 0 1200 100"
                         preserveAspectRatio="none"
-                        className="absolute inset-y-0 left-0 h-full w-[170%] -translate-x-[25%] transition-transform duration-[1300ms] ease-out group-hover:translate-x-0"
+                        className="absolute inset-y-0 left-0 h-full w-[170%] -translate-x-[25%] transition-transform duration-[1300ms] ease-out lg:group-hover:translate-x-0"
                       >
                         <path
                           d="M0,58 C150,8 300,96 450,48 C600,4 750,92 900,46 C1050,6 1130,78 1200,42 L1200,100 L0,100 Z"
@@ -122,7 +122,7 @@ export function Services() {
                       <svg
                         viewBox="0 0 1200 100"
                         preserveAspectRatio="none"
-                        className="absolute inset-y-0 left-0 h-full w-[170%] translate-x-0 transition-transform duration-[1400ms] ease-out group-hover:-translate-x-[32%]"
+                        className="absolute inset-y-0 left-0 h-full w-[170%] translate-x-0 transition-transform duration-[1400ms] ease-out lg:group-hover:-translate-x-[32%]"
                       >
                         <path
                           d="M0,64 C160,14 310,98 480,52 C640,8 800,94 960,48 C1080,14 1150,74 1200,50 L1200,100 L0,100 Z"
@@ -131,20 +131,20 @@ export function Services() {
                       </svg>
                     </div>
 
-                    {/* Contenido: título arriba + descripción + botón fijo siempre en la misma posición inferior */}
+                    {/* Contenido: siempre visible y clickeable en móvil; revelado en hover en escritorio */}
                     <div className="relative flex h-full flex-col justify-between px-6 pb-4 pt-1">
                       <div>
                         <h3 className="truncate font-display text-2xl font-bold leading-tight tracking-tight sm:text-[25px]">
                           {title}
                         </h3>
                         <p
-                          className={`mt-1.5 line-clamp-2 translate-y-2 text-xs leading-relaxed opacity-0 transition-all duration-500 delay-75 sm:text-[13px] group-hover:translate-y-0 group-hover:opacity-100 ${theme.subtext}`}
+                          className={`mt-1.5 line-clamp-2 text-xs leading-relaxed transition-all duration-500 delay-75 sm:text-[13px] lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 ${theme.subtext}`}
                         >
                           {description}
                         </p>
                       </div>
 
-                      <div className="translate-y-2 opacity-0 transition-all duration-500 delay-100 group-hover:translate-y-0 group-hover:opacity-100">
+                      <div className="transition-all duration-500 delay-100 lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">
                         {href ? (
                           <Link href={href} className={ctaClasses}>
                             {ctaLabel}
