@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ArrowRight, RotateCcw } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(useGSAP);
 
@@ -12,13 +12,13 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const revealRef = useRef<HTMLDivElement>(null);
   const beamRef = useRef<HTMLDivElement>(null);
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   useGSAP(
     () => {
+      const section = sectionRef.current;
       const reveal = revealRef.current;
       const beam = beamRef.current;
-      if (!reveal || !beam) return;
+      if (!section || !reveal || !beam) return;
 
       const prefersReduced =
         typeof window !== "undefined" &&
@@ -40,34 +40,71 @@ export function Hero() {
 
       applySweep();
 
-      const tl = gsap.timeline({ delay: 0.65 });
+      // Bucle continuo: Antes -> barrido izq-der -> pausa en Después -> barrido der-izq -> pausa en Antes
+      const tl = gsap.timeline({
+        repeat: -1,
+        delay: 0.6,
+      });
 
       tl.to(beam, { autoAlpha: 1, duration: 0.25, ease: "power1.out" })
         .to(
           state,
           {
             pct: 100,
-            duration: 2.6,
+            duration: 2.5,
             ease: "power2.inOut",
             onUpdate: applySweep,
           },
           "<0.05",
         )
-        .to(beam, { autoAlpha: 0, duration: 0.45, ease: "power2.out" }, "-=0.25");
+        .to(beam, { autoAlpha: 0, duration: 0.4, ease: "power2.out" }, "-=0.2")
+        // Pausa para apreciar el local terminado
+        .to({}, { duration: 3.6 })
+        // Regreso suave de derecha a izquierda
+        .to(beam, { autoAlpha: 1, duration: 0.25, ease: "power1.out" })
+        .to(
+          state,
+          {
+            pct: 0,
+            duration: 1.9,
+            ease: "power2.inOut",
+            onUpdate: applySweep,
+          },
+          "<0.05",
+        )
+        .to(beam, { autoAlpha: 0, duration: 0.35, ease: "power2.out" }, "-=0.2")
+        // Pausa breve en el local blanco antes de repetir
+        .to({}, { duration: 1.1 });
 
-      tlRef.current = tl;
+      // Pausa el bucle automáticamente si el Hero sale del viewport o se cambia de pestaña
+      let inView = true;
+      const syncPlayback = () => {
+        if (inView && !document.hidden) {
+          tl.play();
+        } else {
+          tl.pause();
+        }
+      };
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          inView = Boolean(entries[0]?.isIntersecting);
+          syncPlayback();
+        },
+        { threshold: 0.1 },
+      );
+      io.observe(section);
+
+      document.addEventListener("visibilitychange", syncPlayback);
 
       return () => {
+        io.disconnect();
+        document.removeEventListener("visibilitychange", syncPlayback);
         tl.kill();
-        tlRef.current = null;
       };
     },
     { scope: sectionRef },
   );
-
-  const replay = () => {
-    tlRef.current?.restart();
-  };
 
   return (
     <section
@@ -106,7 +143,7 @@ export function Hero() {
           />
         </div>
 
-        {/* Haz luminoso CMY que barre de izquierda a derecha durante la revelación */}
+        {/* Haz luminoso CMY que barre durante la revelación */}
         <div
           ref={beamRef}
           aria-hidden="true"
@@ -150,17 +187,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Botón discreto en la esquina inferior derecha para repetir el barrido */}
-      <button
-        type="button"
-        onClick={replay}
-        aria-label="Repetir transición"
-        className="absolute bottom-6 right-6 z-20 hidden items-center gap-1.5 rounded-full border border-ink/15 bg-white/85 px-3.5 py-2 text-xs font-semibold text-ink shadow-sm backdrop-blur-md transition hover:border-cyan hover:text-cyan sm:inline-flex"
-      >
-        <RotateCcw className="size-3.5" />
-        Repetir
-      </button>
     </section>
   );
 }
